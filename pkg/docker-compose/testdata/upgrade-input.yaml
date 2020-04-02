@@ -1,0 +1,8 @@
+upgrade:
+  - docker-compose:
+      description: "Compose Up"
+      arguments:
+        - up
+        - --build
+      flags:
+        scale: 2

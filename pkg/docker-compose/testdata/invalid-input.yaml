@@ -1,0 +1,5 @@
+install:
+  - docker-compose:
+      description: "Compose Up"
+      args:
+        - up

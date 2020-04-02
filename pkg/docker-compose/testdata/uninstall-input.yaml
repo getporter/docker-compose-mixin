@@ -1,0 +1,8 @@
+uninstall:
+  - docker-compose:
+      description: "Compose Down"
+      arguments:
+        - down
+        - --remove-orphans
+      flags:
+        timeout: 25

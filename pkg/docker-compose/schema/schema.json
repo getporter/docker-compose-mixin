@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "installStep": {
+      "type": "object",
+      "properties": {
+        "docker-compose": {"$ref": "#/definitions/docker-compose"}
+      },
+      "required": [
+        "docker-compose"
+      ],
+      "additionalProperties": false
+    },
+    "upgradeStep": {
+      "type": "object",
+      "properties": {
+        "docker-compose": {"$ref": "#/definitions/docker-compose"}
+      },
+      "required": [
+        "docker-compose"
+      ],
+      "additionalProperties": false
+    },
+    "invokeStep": {
+      "type": "object",
+      "properties": {
+        "docker-compose": {"$ref": "#/definitions/docker-compose"}
+      },
+      "required": [
+        "docker-compose"
+      ],
+      "additionalProperties": false
+    },
+    "uninstallStep": {
+      "type": "object",
+      "properties": {
+        "docker-compose": {"$ref": "#/definitions/docker-compose"}
+      },
+      "required": [
+        "docker-compose"
+      ],
+      "additionalProperties": false
+    },
+    "stepDescription": {
+      "type": "string",
+      "minLength": 1
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "jsonPath": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "oneOf": [
+          { "required": [ "jsonPath" ] },
+          { "required": [ "path" ] }
+        ]
+      }
+    },
+    "docker-compose": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "$ref": "#/definitions/stepDescription"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["null","boolean","number","string"]
+          }
+        },
+        "outputs": {
+          "$ref": "#/definitions/outputs"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "install": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/installStep"
+      }
+    },
+    "upgrade": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/upgradeStep"
+      }
+    },
+    "uninstall": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/uninstallStep"
+      }
+    }
+  },
+  "additionalProperties": {
+    "type": "array",
+    "items": {
+      "$ref": "#/definitions/invokeStep"
+    }
+  }
+}

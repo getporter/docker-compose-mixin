@@ -1,0 +1,8 @@
+ps:
+  - docker-compose:
+      description: "Compose ps"
+      arguments:
+        - ps
+        - --all
+      flags:
+        filter: foo=bar

@@ -1,0 +1,11 @@
+action:
+  - docker-compose:
+      description: "Compose Up"
+      arguments:
+        - up
+        - -d
+      flags:
+        timeout: 25
+      outputs:
+        - name: "containerId"
+          jsonPath: "$Id"

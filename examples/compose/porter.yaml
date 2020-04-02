@@ -1,0 +1,40 @@
+# This is a porter.yaml that exhibits how to use --allow-docker-host-access in Porter
+# to build and run Docker containers with Docker Compose.
+#
+# To build/run docker-compose containers (starts a custom nginx and a redis):
+#   porter install --allow-docker-host-access
+#
+# To stop all containers:
+#   porter uninstall --allow-docker-host-access
+#
+name: docker-compose
+version: 0.1.0
+description: A sample bundle using Docker Compose
+tag: getporter/docker-compose:v0.1.0
+
+mixins:
+  - docker-compose
+
+customActions:
+  ps:
+    description: Docker docker-compose ps
+
+install:
+  - docker-compose:
+      description: Docker docker-compose up
+      arguments:
+        - up
+        - -d
+
+ps:
+  - docker-compose:
+      description: Docker docker-compose ps
+      arguments:
+        - ps
+
+uninstall:
+  - docker-compose:
+      description: Docker docker-compose down
+      arguments:
+        - down
+        - --remove-orphans
