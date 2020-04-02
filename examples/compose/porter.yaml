@@ -7,7 +7,7 @@
 # To stop all containers:
 #   porter uninstall --allow-docker-host-access
 #
-name: docker-compose
+name: compose
 version: 0.1.0
 description: A sample bundle using Docker Compose
 tag: getporter/docker-compose:v0.1.0
@@ -17,24 +17,24 @@ mixins:
 
 customActions:
   ps:
-    description: Docker docker-compose ps
+    description: Docker Compose ps
 
 install:
   - docker-compose:
-      description: Docker docker-compose up
+      description: Docker Compose up
       arguments:
         - up
         - -d
 
 ps:
   - docker-compose:
-      description: Docker docker-compose ps
+      description: Docker Compose ps
       arguments:
         - ps
 
 uninstall:
   - docker-compose:
-      description: Docker docker-compose down
+      description: Docker Compose down
       arguments:
         - down
         - --remove-orphans
