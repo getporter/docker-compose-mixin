@@ -2,13 +2,12 @@
 
 This is a mixin for Porter that provides the Docker Compose (docker-compose) CLI.
 
-[![Build Status](https://dev.azure.com/deislabs/porter/_apis/build/status/porter-docker-compose?branchName=master)](https://dev.azure.com/deislabs/porter/_build/latest?definitionId=TODO&branchName=master)
+[![Build Status](https://dev.azure.com/deislabs/porter/_apis/build/status/porter-docker-compose?branchName=master)](https://dev.azure.com/deislabs/porter/_build/latest?definitionId=32&branchName=master)
 
-## Mixin Configuration
+## Mixin Declaration
 
-When you declare the mixin, you can also configure additional extensions to install
+To use this mixin in a bundle, declare it like so:
 
-**Use the docker-compose CLI**
 ```yaml
 mixins:
 - docker-compose
@@ -122,7 +121,7 @@ See full bundle examples in the `examples` directory.
 
 ## Invocation
 
-Use of this mixin requires opting-in to Docker host access via a Porter setting.  See [todo](todo) for details.
+Use of this mixin requires opting-in to Docker host access via a Porter setting.  See the Porter [documentation](https://porter.sh/configuration/#allow-docker-host-access) for further details.
 
 Here we opt-in via the CLI flag, `--allow-docker-host-access`:
 
