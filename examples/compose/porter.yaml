@@ -12,12 +12,12 @@ version: 0.1.0
 description: A sample bundle using Docker Compose
 tag: getporter/docker-compose:v0.1.0
 
+required:
+  - docker:
+      privileged: false
+
 mixins:
   - docker-compose
-
-customActions:
-  ps:
-    description: Docker Compose ps
 
 install:
   - docker-compose:
