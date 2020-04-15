@@ -13,6 +13,31 @@ mixins:
 - docker-compose
 ```
 
+## Required Extension
+
+To declare that Docker access is required to run the bundle, as will probably
+always be the case when using this mixin, we can add `docker` (the extension name)
+under the `required` section in the manifest, like so:
+
+```yaml
+required:
+  - docker
+```
+
+Additional configuration for this extension is currently limited to whether or
+not the container should run as privileged or not:
+
+```yaml
+required:
+  - docker
+      privileged: false
+```
+
+Declaring this extension as required is a great way to let potential users of
+your bundle know that Docker access is necessary to install.
+
+See more information via the [Porter documentation](https://porter.sh/author-bundles/#docker).
+
 ## Mixin Syntax
 
 See the [docker-compose CLI Command Reference](https://docs.docker.com/docker-compose/reference/) for the supported commands.
