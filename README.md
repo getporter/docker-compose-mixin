@@ -98,7 +98,7 @@ For example, if the `jsonPath` expression was `$[*].id` and the command sent the
 ]
 ```
 
-Then then output would have the following contents:
+Then output would have the following contents:
 
 ```json
 ["1085517466897181794"]
