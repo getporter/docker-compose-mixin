@@ -40,7 +40,7 @@ See more information via the [Porter documentation](https://porter.sh/author-bun
 
 ## Mixin Syntax
 
-See the [docker-compose CLI Command Reference](https://docs.docker.com/docker-compose/reference/) for the supported commands.
+See the [docker-compose CLI Command Reference](https://docs.docker.com/compose/reference/) for the supported commands.
 
 ```yaml
 docker-compose:
