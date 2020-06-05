@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y python3-pip wget && pip3 install --upgr
   mv docker/docker /usr/bin/docker && \
   chmod +x /usr/bin/docker && \
   rm -rf docker/ docker-${DOCKER_VERSION}.tgz && \
-  pip3 install docker-compose==1.25.4
+  pip3 install docker-compose==1.26.0
 `
 
 	t.Run("build", func(t *testing.T) {
