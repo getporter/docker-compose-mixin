@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const dockerComposeVersion = "1.25.4"
+const dockerComposeVersion = "1.26.0"
 
 // Build installs the docker and docker-compose binaries
 func (m *Mixin) Build() error {
