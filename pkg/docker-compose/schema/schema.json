@@ -90,6 +90,10 @@
         },
         "outputs": {
           "$ref": "#/definitions/outputs"
+        },
+        "suppress-output": {
+          "type": "boolean",
+          "default": false
         }
       },
       "additionalProperties": false,
