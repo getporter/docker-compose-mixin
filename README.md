@@ -2,7 +2,7 @@
 
 This is a mixin for Porter that provides the Docker Compose (docker-compose) CLI.
 
-[![Build Status](https://dev.azure.com/deislabs/porter/_apis/build/status/porter-docker-compose?branchName=main)](https://dev.azure.com/deislabs/porter/_build/latest?definitionId=32&branchName=main)
+[![Build Status](https://dev.azure.com/getporter/porter/_apis/build/status/docker-compose-mixin?branchName=main)](https://dev.azure.com/getporter/porter/_build/latest?definitionId=6&branchName=main)
 
 ## Mixin Declaration
 
