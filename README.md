@@ -4,6 +4,8 @@ This is a mixin for Porter that provides the Docker Compose (docker-compose) CLI
 
 [![Build Status](https://dev.azure.com/getporter/porter/_apis/build/status/docker-compose-mixin?branchName=main)](https://dev.azure.com/getporter/porter/_build/latest?definitionId=6&branchName=main)
 
+<img src="https://porter.sh/images/mixins/docker-compose.png" align="right" width="150px"/>
+
 ## Mixin Declaration
 
 To use this mixin in a bundle, declare it like so:
