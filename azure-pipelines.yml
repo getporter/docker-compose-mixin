@@ -7,7 +7,7 @@ trigger:
   branches:
     include:
       - refs/heads/main
-      - refs/tags/*
+      - refs/tags/v*
 
 pool:
   vmImage: 'Ubuntu 16.04'
@@ -26,21 +26,19 @@ steps:
 
 - script: |
      make build test-unit
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Test Unit'
 
 - script: |
     make xbuild-all
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Cross Compile'
 
 - script: |
     make test-integration
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Test Integration'
 
 - script: |
-    AZURE_STORAGE_CONNECTION_STRING=$(AZURE_STORAGE_CONNECTION_STRING) make publish
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+    make publish
+  env:
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
   displayName: 'Publish'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
