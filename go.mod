@@ -3,7 +3,7 @@ module get.porter.sh/mixin/docker-compose
 go 1.13
 
 require (
-	get.porter.sh/porter v0.37.2
+	get.porter.sh/porter v0.38.1
 	github.com/ghodss/yaml v1.0.0
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/spf13/cobra v1.0.0

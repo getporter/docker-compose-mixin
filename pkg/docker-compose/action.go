@@ -57,12 +57,13 @@ var _ builder.StepWithOutputs = Step{}
 var _ builder.SuppressesOutput = Step{}
 
 type Instruction struct {
-	Name           string        `yaml:"name"`
-	Description    string        `yaml:"description"`
-	Arguments      []string      `yaml:"arguments,omitempty"`
-	Flags          builder.Flags `yaml:"flags,omitempty"`
-	Outputs        []Output      `yaml:"outputs,omitempty"`
-	SuppressOutput bool          `yaml:"suppress-output,omitempty"`
+	Name             string        `yaml:"name"`
+	Description      string        `yaml:"description"`
+	Arguments        []string      `yaml:"arguments,omitempty"`
+	Flags            builder.Flags `yaml:"flags,omitempty"`
+	Outputs          []Output      `yaml:"outputs,omitempty"`
+	SuppressOutput   bool          `yaml:"suppress-output,omitempty"`
+	WorkingDirectory string        `yaml:"dir,omitempty"`
 }
 
 func (s Step) GetCommand() string {
@@ -75,6 +76,10 @@ func (s Step) GetArguments() []string {
 
 func (s Step) GetFlags() builder.Flags {
 	return s.Flags
+}
+
+func (s Step) GetWorkingDir() string {
+	return s.WorkingDirectory
 }
 
 func (s Step) GetOutputs() []builder.Output {
