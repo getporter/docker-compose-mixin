@@ -77,6 +77,10 @@
           "description": "Description of what this step in the bundle does",
           "type": "string"
         },
+        "dir": {
+          "description": "The directory in which to execute the command",
+          "type": "string"
+        },
         "arguments": {
           "description": "Positional arguments to pass to docker-compose, e.g. up",
           "type": "array",
