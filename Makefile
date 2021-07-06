@@ -48,7 +48,7 @@ generate: packr2
 HAS_PACKR2 := $(shell command -v packr2)
 packr2:
 ifndef HAS_PACKR2
-	$(GO) get -u github.com/gobuffalo/packr/v2/packr2
+	cd /tmp && $(GO) get github.com/gobuffalo/packr/v2/packr2@v2.6.0
 endif
 
 xbuild-all: generate
