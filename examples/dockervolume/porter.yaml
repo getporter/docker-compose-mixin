@@ -1,0 +1,69 @@
+name: dockervolume
+version: 0.1.0
+description: A Porter bundle for a Docker Compose application utilizing a Docker Volume
+registry: getporter
+
+required:
+  - docker
+
+parameters:
+  - name: echo_text
+    type: string
+    default: Hello from Porter!
+    path: /cnab/app/echo.txt
+
+mixins:
+  - exec
+  - docker-compose
+  - docker:
+      clientVersion: 20.10.7
+
+install:
+  - exec:
+      description: "Create Docker Volume"
+      command: ./helpers.sh
+      arguments:
+        - create_docker_volume
+
+  - docker-compose:
+      description: "Docker Compose Up"
+      arguments:
+        - up
+        - -d
+
+  - exec:
+      description: "Print app logs"
+      command: ./helpers.sh
+      arguments:
+        - print_app_logs
+
+upgrade:
+  - exec:
+      description: "Update Docker Volume"
+      command: ./helpers.sh
+      arguments:
+        - update_docker_volume
+
+  - docker-compose:
+      description: "Docker Compose Up"
+      arguments:
+        - up
+        - -d
+
+  - exec:
+      description: "Print app logs"
+      command: ./helpers.sh
+      arguments:
+        - print_app_logs
+
+uninstall:
+  - docker-compose:
+      description: "Docker Compose Down"
+      arguments:
+        - down
+
+  - exec:
+      description: "Remove Docker Volume"
+      command: ./helpers.sh
+      arguments:
+        - remove_docker_volume
