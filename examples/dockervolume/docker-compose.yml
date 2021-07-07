@@ -1,0 +1,13 @@
+version: "3.6"
+services:
+  awk:
+    image: busybox
+    command:
+      - "/bin/sh"
+      - "-c"
+      - "awk 1 /data/config.toml /data/echo.txt > /data/log.txt"
+    volumes:
+      - myvol:/data
+volumes:
+  myvol:
+    external: true
