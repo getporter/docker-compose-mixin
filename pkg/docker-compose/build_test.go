@@ -1,6 +1,8 @@
 package dockercompose
 
 import (
+	"bytes"
+	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -15,7 +17,7 @@ RUN apt-get update && apt-get install -y python3-pip wget && pip3 install --upgr
   mv docker/docker /usr/bin/docker && \
   chmod +x /usr/bin/docker && \
   rm -rf docker/ docker-${DOCKER_VERSION}.tgz && \
-  pip3 install docker-compose==1.26.0
+  pip3 install docker-compose==1.29.2
 `
 
 	t.Run("build", func(t *testing.T) {
@@ -28,5 +30,33 @@ RUN apt-get update && apt-get install -y python3-pip wget && pip3 install --upgr
 		wantOutput := buildOutput
 		gotOutput := m.TestContext.GetOutput()
 		assert.Equal(t, wantOutput, gotOutput)
+	})
+
+	t.Run("build with a defined docker-compose client version", func(t *testing.T) {
+		b, err := ioutil.ReadFile("testdata/build-input-with-version.yaml")
+		require.NoError(t, err)
+
+		m := NewTestMixin(t)
+		m.Debug = false
+		m.In = bytes.NewReader(b)
+
+		err = m.Build()
+		require.NoError(t, err, "build failed")
+
+		wantOutput := buildOutput
+		gotOutput := m.TestContext.GetOutput()
+		assert.Equal(t, wantOutput, gotOutput)
+	})
+
+	t.Run("build with invalid config", func(t *testing.T) {
+		b, err := ioutil.ReadFile("testdata/build-input-with-invalid-config.yaml")
+		require.NoError(t, err)
+
+		m := NewTestMixin(t)
+		m.Debug = false
+		m.In = bytes.NewReader(b)
+
+		err = m.Build()
+		require.Error(t, err, "build failed")
 	})
 }

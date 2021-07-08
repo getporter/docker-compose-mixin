@@ -1,0 +1,9 @@
+config:
+  clientPlatform
+
+install:
+  - docker-compose:
+      description: "Compose Up"
+      arguments:
+        - up
+        - --build
