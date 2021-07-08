@@ -1,0 +1,9 @@
+config:
+  clientVersion: 1.29.2
+
+install:
+  - docker-compose:
+      description: "Compose Up"
+      arguments:
+        - up
+        - --build
