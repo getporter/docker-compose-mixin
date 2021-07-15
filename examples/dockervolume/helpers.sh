@@ -7,7 +7,7 @@ create_docker_volume() {
     docker volume create myvol
 
   # Add files to volume via a helper container
-  docker run -v myvol:/data --name helper busybox true
+  docker create -v myvol:/data --name helper busybox true
   # Could copy the entire app directory in
   # docker cp /cnab/app helper:/data
   docker cp /cnab/app/echo.txt helper:/data
