@@ -15,6 +15,14 @@ mixins:
 - docker-compose
 ```
 
+To override the default docker-compose version, you can declare the mixin such as:
+
+```yaml
+mixins:
+- docker-compose:
+    clientVersion: 1.26.0
+```
+
 ## Required Extension
 
 To declare that Docker access is required to run the bundle, as will probably
@@ -89,7 +97,7 @@ outputs:
   jsonPath: JSONPATH
 ```
 
-For example, if the `jsonPath` expression was `$[*].id` and the command sent the following to stdout: 
+For example, if the `jsonPath` expression was `$[*].id` and the command sent the following to stdout:
 
 ```json
 [
