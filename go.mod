@@ -1,15 +1,23 @@
 module get.porter.sh/mixin/docker-compose
 
-go 1.13
+go 1.16
 
-require (
-	get.porter.sh/porter v0.38.1
-	github.com/ghodss/yaml v1.0.0
-	github.com/gobuffalo/packr/v2 v2.8.0
-	github.com/spf13/cobra v1.0.0
-	github.com/stretchr/testify v1.6.1
-	github.com/xeipuuv/gojsonschema v1.2.0
-	gopkg.in/yaml.v2 v2.2.4
+replace (
+	// common-magefile-functions
+	// https://github.com/getporter/porter/pull/1852
+	get.porter.sh/porter => github.com/carolynvs/porter v1.0.0-alpha.6.0.20220107173624-b7286345c90f
+
+	// These are replace directives copied from porter
+	// They must match the replaces used by porter everything to compile
+	github.com/hashicorp/go-plugin => github.com/carolynvs/go-plugin v1.0.1-acceptstdin
+	github.com/spf13/viper => github.com/getporter/viper v1.7.1-porter.2.0.20210514172839-3ea827168363
 )
 
-replace github.com/hashicorp/go-plugin => github.com/carolynvs/go-plugin v1.0.1-acceptstdin
+require (
+	get.porter.sh/porter v1.0.0-alpha.5
+	github.com/ghodss/yaml v1.0.0
+	github.com/spf13/cobra v1.1.3
+	github.com/stretchr/testify v1.7.0
+	github.com/xeipuuv/gojsonschema v1.2.0
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
+)

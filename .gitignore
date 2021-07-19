@@ -1,5 +1,4 @@
 bin
 .cnab
-*-packr.go
 /build/git_askpass.sh
 
