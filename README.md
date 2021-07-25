@@ -11,7 +11,7 @@ This is a mixin for Porter that provides the Docker Compose (docker-compose) CLI
 This will install the latest mixin release via the Porter CLI.
 
 ```
-porter mixin install docker-compose --feed-url https://cdn.porter.sh/mixins/atom.xml
+porter mixin install docker-compose
 ```
 
 ## Mixin Declaration
