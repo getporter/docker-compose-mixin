@@ -6,6 +6,14 @@ This is a mixin for Porter that provides the Docker Compose (docker-compose) CLI
 
 <img src="https://porter.sh/images/mixins/docker-compose.png" align="right" width="150px"/>
 
+## Install via Porter
+
+This will install the latest mixin release via the Porter CLI.
+
+```
+porter mixin install docker-compose
+```
+
 ## Mixin Declaration
 
 To use this mixin in a bundle, declare it like so:
