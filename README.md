@@ -31,6 +31,27 @@ mixins:
     clientVersion: 1.26.0
 ```
 
+## Docker mixin
+
+This `docker-compose` mixin only adds the [docker-compose] CLI. However, the
+[docker] CLI will also most likely be required by bundles using Docker Compose.
+
+To add `docker`, you'll need to add the [Docker mixin] under the `mixins`
+section as well.
+
+```yaml
+mixins:
+- docker
+```
+
+For further details and configuration options for the Docker mixin, see the
+repo's [README][Docker mixin README].
+
+[docker-compose]: https://docs.docker.com/compose/reference/
+[docker]: https://docs.docker.com/engine/reference/commandline/cli/
+[Docker mixin]: https://github.com/getporter/docker-mixin
+[Docker mixin README]: https://github.com/getporter/docker-mixin#readme
+
 ## Required Extension
 
 To declare that Docker access is required to run the bundle, as will probably
