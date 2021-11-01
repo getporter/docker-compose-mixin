@@ -18,6 +18,7 @@ required:
 
 mixins:
   - docker-compose
+  - docker
 
 install:
   - docker-compose:
