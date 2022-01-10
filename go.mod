@@ -5,7 +5,7 @@ go 1.16
 replace (
 	// common-magefile-functions
 	// https://github.com/getporter/porter/pull/1852
-	get.porter.sh/porter => github.com/carolynvs/porter v1.0.0-alpha.6.0.20220107173624-b7286345c90f
+	get.porter.sh/porter => github.com/carolynvs/porter v1.0.0-alpha.6.0.20220110193159-88e8c73c92f0
 
 	// These are replace directives copied from porter
 	// They must match the replaces used by porter everything to compile
