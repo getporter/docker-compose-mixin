@@ -1,4 +1,3 @@
-//go:generate packr2
 package dockercompose
 
 import (

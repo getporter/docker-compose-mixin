@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"get.porter.sh/porter/pkg/exec/builder"
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 )
 
 const dockerComposeDefaultVersion = "1.29.2"

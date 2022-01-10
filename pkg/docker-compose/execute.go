@@ -2,7 +2,7 @@ package dockercompose
 
 import (
 	"get.porter.sh/porter/pkg/exec/builder"
-	yaml "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v3"
 )
 
 func (m *Mixin) loadAction() (*Action, error) {

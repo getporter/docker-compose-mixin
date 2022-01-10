@@ -15,29 +15,19 @@ pool:
 steps:
 - task: GoTool@0
   inputs:
-    version: '1.13.10'
+    version: '1.16'
   displayName: 'Install Go'
 
-- script: |
-    set -xeuo pipefail
-    mkdir -p /home/vsts/go/bin/
-    echo "##vso[task.prependpath]/home/vsts/go/bin/"
-  displayName: 'Configure Go'
+- script: go run mage.go ConfigureAgent
+  displayName: "Configure Agent"
 
-- script: |
-     make build test-unit
-  displayName: 'Test Unit'
+- script: mage Test
+  displayName: 'Test'
 
-- script: |
-    make xbuild-all
+- script: mage XBuildAll
   displayName: 'Cross Compile'
 
-- script: |
-    make test-integration
-  displayName: 'Test Integration'
-
-- script: |
-    make publish
+- script: mage Publish
   env:
     GITHUB_TOKEN: $(GITHUB_TOKEN)
   displayName: 'Publish'
