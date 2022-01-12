@@ -3,10 +3,6 @@ module get.porter.sh/mixin/docker-compose
 go 1.16
 
 replace (
-	// common-magefile-functions
-	// https://github.com/getporter/porter/pull/1852
-	get.porter.sh/porter => github.com/carolynvs/porter v1.0.0-alpha.6.0.20220110200318-b48237d12b5c
-
 	// These are replace directives copied from porter
 	// They must match the replaces used by porter everything to compile
 	github.com/hashicorp/go-plugin => github.com/carolynvs/go-plugin v1.0.1-acceptstdin
@@ -14,7 +10,7 @@ replace (
 )
 
 require (
-	get.porter.sh/porter v1.0.0-alpha.5
+	get.porter.sh/porter v1.0.0-alpha.6
 	github.com/ghodss/yaml v1.0.0
 	github.com/spf13/cobra v1.1.3
 	github.com/stretchr/testify v1.7.0
