@@ -10,7 +10,7 @@ replace (
 )
 
 require (
-	get.porter.sh/porter v1.0.0-alpha.6
+	get.porter.sh/porter v1.0.0-alpha.7
 	github.com/ghodss/yaml v1.0.0
 	github.com/spf13/cobra v1.1.3
 	github.com/stretchr/testify v1.7.0
