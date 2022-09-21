@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"get.porter.sh/porter/pkg/exec/builder"
-	yaml "gopkg.in/yaml.v3"
+	"gopkg.in/yaml.v3"
 )
 
 const dockerComposeDefaultVersion = "2.10.2"
@@ -44,7 +44,7 @@ func (m *Mixin) Build(ctx context.Context) error {
 	}
 
 	dockerfileLines := fmt.Sprintf(`RUN apt-get update && apt-get install -y curl && \
-curl -L "https://github.com/docker/compose/releases/download/%s/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
+curl -fL "https://github.com/docker/compose/releases/download/v%s/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
 chmod +x /usr/local/bin/docker-compose`, dockerComposeVersion)
 
 	fmt.Fprintln(m.Out, dockerfileLines)
