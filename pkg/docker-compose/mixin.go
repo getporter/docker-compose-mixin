@@ -1,18 +1,15 @@
 package dockercompose
 
-import (
-	"get.porter.sh/porter/pkg/context"
-)
+import "get.porter.sh/porter/pkg/runtime"
 
 type Mixin struct {
-	*context.Context
-	//add whatever other context/state is needed here
+	runtime.RuntimeConfig
+	// add whatever other context/state is needed here
 }
 
 // New docker-compose mixin client, initialized with useful defaults.
-func New() (*Mixin, error) {
+func New() *Mixin {
 	return &Mixin{
-		Context: context.New(),
-	}, nil
-
+		RuntimeConfig: runtime.NewConfig(),
+	}
 }

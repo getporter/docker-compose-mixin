@@ -2,6 +2,7 @@ package dockercompose
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"testing"
 
@@ -11,15 +12,15 @@ import (
 
 func TestMixin_Build(t *testing.T) {
 	const buildOutput = `RUN apt-get update && apt-get install -y curl && \
-curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
+curl -fL "https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
 chmod +x /usr/local/bin/docker-compose
 `
 
 	t.Run("build", func(t *testing.T) {
 		m := NewTestMixin(t)
-		m.Debug = false
+		m.DebugMode = false
 
-		err := m.Build()
+		err := m.Build(context.Background())
 		require.NoError(t, err, "build failed")
 
 		wantOutput := buildOutput
@@ -32,10 +33,10 @@ chmod +x /usr/local/bin/docker-compose
 		require.NoError(t, err)
 
 		m := NewTestMixin(t)
-		m.Debug = false
+		m.DebugMode = false
 		m.In = bytes.NewReader(b)
 
-		err = m.Build()
+		err = m.Build(context.Background())
 		require.NoError(t, err, "build failed")
 
 		wantOutput := buildOutput
@@ -48,10 +49,10 @@ chmod +x /usr/local/bin/docker-compose
 		require.NoError(t, err)
 
 		m := NewTestMixin(t)
-		m.Debug = false
+		m.DebugMode = false
 		m.In = bytes.NewReader(b)
 
-		err = m.Build()
+		err = m.Build(context.Background())
 		require.Error(t, err, "build failed")
 	})
 }

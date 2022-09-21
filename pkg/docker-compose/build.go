@@ -1,13 +1,14 @@
 package dockercompose
 
 import (
+	"context"
 	"fmt"
 
 	"get.porter.sh/porter/pkg/exec/builder"
-	yaml "gopkg.in/yaml.v3"
+	"gopkg.in/yaml.v3"
 )
 
-const dockerComposeDefaultVersion = "1.29.2"
+const dockerComposeDefaultVersion = "2.10.2"
 
 // BuildInput represents stdin passed to the mixin for the build command.
 type BuildInput struct {
@@ -24,10 +25,10 @@ type MixinConfig struct {
 }
 
 // Build installs the docker and docker-compose binaries
-func (m *Mixin) Build() error {
+func (m *Mixin) Build(ctx context.Context) error {
 	// Create new Builder.
 	var input BuildInput
-	err := builder.LoadAction(m.Context, "", func(contents []byte) (interface{}, error) {
+	err := builder.LoadAction(ctx, m.RuntimeConfig, "", func(contents []byte) (interface{}, error) {
 		err := yaml.Unmarshal(contents, &input)
 		return &input, err
 	})
@@ -43,7 +44,7 @@ func (m *Mixin) Build() error {
 	}
 
 	dockerfileLines := fmt.Sprintf(`RUN apt-get update && apt-get install -y curl && \
-curl -L "https://github.com/docker/compose/releases/download/%s/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
+curl -fL "https://github.com/docker/compose/releases/download/v%s/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
 chmod +x /usr/local/bin/docker-compose`, dockerComposeVersion)
 
 	fmt.Fprintln(m.Out, dockerfileLines)

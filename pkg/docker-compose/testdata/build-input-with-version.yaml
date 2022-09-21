@@ -1,5 +1,5 @@
 config:
-  clientVersion: 1.29.2
+  clientVersion: 2.10.2
 
 install:
   - docker-compose:
