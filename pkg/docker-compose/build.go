@@ -8,7 +8,7 @@ import (
 	yaml "gopkg.in/yaml.v3"
 )
 
-const dockerComposeDefaultVersion = "20.10.18"
+const dockerComposeDefaultVersion = "2.10.2"
 
 // BuildInput represents stdin passed to the mixin for the build command.
 type BuildInput struct {

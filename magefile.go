@@ -15,6 +15,10 @@ const (
 
 var magefile = mixins.NewMagefile(mixinPackage, mixinName, mixinBin)
 
+func ConfigureAgent() {
+	magefile.ConfigureAgent()
+}
+
 // Build the mixin
 func Build() {
 	magefile.Build()
