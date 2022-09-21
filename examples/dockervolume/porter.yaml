@@ -1,7 +1,8 @@
+schemaVersion: 1.0.0
 name: dockervolume
-version: 0.1.0
+version: 0.2.0
 description: A Porter bundle for a Docker Compose application utilizing a Docker Volume
-registry: getporter
+registry: ghcr.io/getporter
 
 required:
   - docker
@@ -16,7 +17,7 @@ mixins:
   - exec
   - docker-compose
   - docker:
-      clientVersion: 20.10.7
+      clientVersion: 20.10.18
 
 install:
   - exec:

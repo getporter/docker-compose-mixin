@@ -2,6 +2,7 @@ package dockercompose
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"testing"
 
@@ -17,9 +18,9 @@ chmod +x /usr/local/bin/docker-compose
 
 	t.Run("build", func(t *testing.T) {
 		m := NewTestMixin(t)
-		m.Debug = false
+		m.DebugMode = false
 
-		err := m.Build()
+		err := m.Build(context.Background())
 		require.NoError(t, err, "build failed")
 
 		wantOutput := buildOutput
@@ -32,10 +33,10 @@ chmod +x /usr/local/bin/docker-compose
 		require.NoError(t, err)
 
 		m := NewTestMixin(t)
-		m.Debug = false
+		m.DebugMode = false
 		m.In = bytes.NewReader(b)
 
-		err = m.Build()
+		err = m.Build(context.Background())
 		require.NoError(t, err, "build failed")
 
 		wantOutput := buildOutput
@@ -48,10 +49,10 @@ chmod +x /usr/local/bin/docker-compose
 		require.NoError(t, err)
 
 		m := NewTestMixin(t)
-		m.Debug = false
+		m.DebugMode = false
 		m.In = bytes.NewReader(b)
 
-		err = m.Build()
+		err = m.Build(context.Background())
 		require.Error(t, err, "build failed")
 	})
 }

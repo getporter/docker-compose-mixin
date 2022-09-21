@@ -7,10 +7,11 @@
 # To stop all containers:
 #   porter uninstall --allow-docker-host-access
 #
+schemaVersion: 1.0.0
 name: compose
-version: 0.1.0
+version: 0.2.0
 description: A sample bundle using Docker Compose
-registry: getporter
+registry: ghcr.io/getporter
 
 required:
   - docker:

@@ -2,6 +2,7 @@ package dockercompose
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"path"
 	"testing"
@@ -22,8 +23,10 @@ func TestMixin_Execute(t *testing.T) {
 		wantOutput  string
 		wantCommand string
 	}{
-		{"install", "testdata/install-input.yaml", "",
-			"docker-compose up --build --scale 2"},
+		{
+			"install", "testdata/install-input.yaml", "",
+			"docker-compose up --build --scale 2",
+		},
 	}
 
 	for _, tc := range testcases {
@@ -37,7 +40,7 @@ func TestMixin_Execute(t *testing.T) {
 
 			m.In = bytes.NewBuffer(mixinInputB)
 
-			err = m.Execute()
+			err = m.Execute(context.Background())
 			require.NoError(t, err, "execute failed")
 
 			if tc.wantOutput == "" {

@@ -1,13 +1,10 @@
+//go:build mage
 // +build mage
 
 package main
 
 import (
-	"get.porter.sh/porter/mage/mixins"
-
-	// Import common targets that all mixins should expose to the user
-	// mage:import
-	_ "get.porter.sh/porter/mage"
+	"get.porter.sh/magefiles/mixins"
 )
 
 const (

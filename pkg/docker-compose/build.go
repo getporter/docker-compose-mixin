@@ -1,6 +1,7 @@
 package dockercompose
 
 import (
+	"context"
 	"fmt"
 
 	"get.porter.sh/porter/pkg/exec/builder"
@@ -24,10 +25,10 @@ type MixinConfig struct {
 }
 
 // Build installs the docker and docker-compose binaries
-func (m *Mixin) Build() error {
+func (m *Mixin) Build(ctx context.Context) error {
 	// Create new Builder.
 	var input BuildInput
-	err := builder.LoadAction(m.Context, "", func(contents []byte) (interface{}, error) {
+	err := builder.LoadAction(ctx, m.RuntimeConfig, "", func(contents []byte) (interface{}, error) {
 		err := yaml.Unmarshal(contents, &input)
 		return &input, err
 	})
