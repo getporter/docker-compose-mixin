@@ -11,9 +11,7 @@ import (
 )
 
 func TestMixin_Build(t *testing.T) {
-	const buildOutput = `RUN apt-get update && apt-get install -y curl && \
-curl -fL "https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose && \
-chmod +x /usr/local/bin/docker-compose
+	const buildOutput = `ADD --chmod=755 https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-linux-x86_64 /usr/local/bin/docker-compose
 `
 
 	t.Run("build", func(t *testing.T) {
