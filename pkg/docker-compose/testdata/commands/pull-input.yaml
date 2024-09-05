@@ -1,0 +1,15 @@
+action:
+  - docker-compose:
+      description: Compose Pull
+      flags:
+        file: test.yml
+      pull:
+        arguments:
+          - serviceA
+          - serviceB
+        flags:
+          ignore-pull-failures:
+          policy: missing
+        outputs:
+          - name: containerId
+            jsonPath: $Id

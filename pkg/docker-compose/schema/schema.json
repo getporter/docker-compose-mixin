@@ -102,6 +102,24 @@
         "suppress-output": {
           "description": "Do not print output from the command",
           "type": "boolean"
+        },
+        "pull": {
+          "description": "Pull service images",
+          "type": "object",
+          "properties": {
+            "arguments": {
+              "$ref": "#/definitions/docker-compose/properties/arguments"
+            },
+            "flags": {
+              "$ref": "#/definitions/docker-compose/properties/flags"
+            },
+            "outputs": {
+              "$ref": "#/definitions/docker-compose/properties/outputs"
+            },
+            "suppress-output": {
+              "$ref": "#/definitions/docker-compose/properties/suppress-output"
+            }
+          }
         }
       },
       "additionalProperties": false

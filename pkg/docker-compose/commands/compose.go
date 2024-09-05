@@ -11,6 +11,7 @@ type ComposeCommand struct {
 	Flags            builder.Flags `yaml:"flags,omitempty"`
 	Outputs          []Output      `yaml:"outputs,omitempty"`
 	SuppressOutput   bool          `yaml:"suppress-output,omitempty"`
+	Subcommand       *PullCommand  `yaml:"pull,omitempty"`
 }
 
 func (c ComposeCommand) GetCommand() string {
@@ -26,7 +27,24 @@ func (c ComposeCommand) GetFlags() builder.Flags {
 }
 
 func (c ComposeCommand) GetSuffixArguments() []string {
-	return nil
+	// Final Command: docker-compose ARGS FLAGS [CMD CMD_ARGS CMD_FLAGS CMD_SUFFIX_ARGS]
+	// We need to return: CMD CMD_ARGS CMD_FLAGS CMD_SUFFIX_ARGS
+	if c.Subcommand == nil {
+		return nil
+	}
+
+	cmd := (*c.Subcommand).GetCommand()
+	cmdArgs := (*c.Subcommand).GetArguments()
+	cmdFlags := (*c.Subcommand).GetFlags()
+	cmdSuffixArgs := (*c.Subcommand).GetSuffixArguments()
+
+	suffixArgs := make([]string, 0, 1+len(cmdArgs)+(len(cmdFlags)*2)+len(cmdSuffixArgs))
+	suffixArgs = append(suffixArgs, cmd)
+	suffixArgs = append(suffixArgs, cmdArgs...)
+	suffixArgs = append(suffixArgs, cmdFlags.ToSlice(builder.DefaultFlagDashes)...)
+	suffixArgs = append(suffixArgs, cmdSuffixArgs...)
+
+	return suffixArgs
 }
 
 func (c ComposeCommand) GetOutputs() []builder.Output {
@@ -35,11 +53,18 @@ func (c ComposeCommand) GetOutputs() []builder.Output {
 	for i := range c.Outputs {
 		outputs[i] = c.Outputs[i]
 	}
+	if c.Subcommand != nil {
+		outputs = append(outputs, (*c.Subcommand).GetOutputs()...)
+	}
 	return outputs
 }
 
 func (c ComposeCommand) SuppressesOutput() bool {
-	return c.SuppressOutput
+	if c.Subcommand != nil && (*c.Subcommand).SuppressesOutput() {
+		return true
+	} else {
+		return c.SuppressOutput
+	}
 }
 
 func (c ComposeCommand) GetWorkingDir() string {
