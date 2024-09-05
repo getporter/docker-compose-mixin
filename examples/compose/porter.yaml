@@ -24,9 +24,9 @@ mixins:
 install:
   - docker-compose:
       description: Docker Compose up
-      arguments:
-        - up
-        - -d
+      up:
+        flags:
+          detach:
 
 ps:
   - docker-compose:
@@ -37,6 +37,6 @@ ps:
 uninstall:
   - docker-compose:
       description: Docker Compose down
-      arguments:
-        - down
-        - --remove-orphans
+      down:
+        flags:
+          remove-orphans:
