@@ -103,8 +103,44 @@
           "description": "Do not print output from the command",
           "type": "boolean"
         },
+        "down": {
+          "description": "Stop and remove containers, networks",
+          "type": "object",
+          "properties": {
+            "arguments": {
+              "$ref": "#/definitions/docker-compose/properties/arguments"
+            },
+            "flags": {
+              "$ref": "#/definitions/docker-compose/properties/flags"
+            },
+            "outputs": {
+              "$ref": "#/definitions/docker-compose/properties/outputs"
+            },
+            "suppress-output": {
+              "$ref": "#/definitions/docker-compose/properties/suppress-output"
+            }
+          }
+        },
         "pull": {
           "description": "Pull service images",
+          "type": "object",
+          "properties": {
+            "arguments": {
+              "$ref": "#/definitions/docker-compose/properties/arguments"
+            },
+            "flags": {
+              "$ref": "#/definitions/docker-compose/properties/flags"
+            },
+            "outputs": {
+              "$ref": "#/definitions/docker-compose/properties/outputs"
+            },
+            "suppress-output": {
+              "$ref": "#/definitions/docker-compose/properties/suppress-output"
+            }
+          }
+        },
+        "up": {
+          "description": "Create and start containers",
           "type": "object",
           "properties": {
             "arguments": {

@@ -1,0 +1,15 @@
+action:
+  - docker-compose:
+      description: Compose Up
+      flags:
+        file: test.yml
+      up:
+        arguments:
+          - serviceA
+          - serviceB
+        flags:
+          detach:
+          timeout: 25
+        outputs:
+          - name: containerId
+            jsonPath: $Id

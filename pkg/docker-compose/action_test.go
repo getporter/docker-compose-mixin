@@ -34,9 +34,21 @@ func TestMixin_UnmarshalStep(t *testing.T) {
 			"Supressed Surprise", []string{"surprise", "me"}, nil, nil, nil, true,
 		},
 		{
+			"down", "testdata/commands/down-input.yaml", "Compose Down", nil,
+			builder.Flags{builder.NewFlag("file", "test.yml")},
+			[]string{"down", "--remove-orphans", "--timeout", "25", "serviceA", "serviceB"},
+			[]commands.Output{{Name: "containerId", JsonPath: "$Id"}}, false,
+		},
+		{
 			"pull", "testdata/commands/pull-input.yaml", "Compose Pull", nil,
 			builder.Flags{builder.NewFlag("file", "test.yml")},
 			[]string{"pull", "--ignore-pull-failures", "--policy", "missing", "serviceA", "serviceB"},
+			[]commands.Output{{Name: "containerId", JsonPath: "$Id"}}, false,
+		},
+		{
+			"up", "testdata/commands/up-input.yaml", "Compose Up", nil,
+			builder.Flags{builder.NewFlag("file", "test.yml")},
+			[]string{"up", "--detach", "--timeout", "25", "serviceA", "serviceB"},
 			[]commands.Output{{Name: "containerId", JsonPath: "$Id"}}, false,
 		},
 	}

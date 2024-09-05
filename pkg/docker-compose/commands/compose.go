@@ -11,7 +11,7 @@ type ComposeCommand struct {
 	Flags            builder.Flags `yaml:"flags,omitempty"`
 	Outputs          []Output      `yaml:"outputs,omitempty"`
 	SuppressOutput   bool          `yaml:"suppress-output,omitempty"`
-	Subcommand       *PullCommand  `yaml:"pull,omitempty"`
+	Subcommand       *Command
 }
 
 func (c ComposeCommand) GetCommand() string {
