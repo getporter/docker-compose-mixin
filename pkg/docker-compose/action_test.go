@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"testing"
 
+	"get.porter.sh/mixin/docker-compose/pkg/docker-compose/commands"
 	"get.porter.sh/porter/pkg/exec/builder"
 
 	"github.com/stretchr/testify/assert"
@@ -23,7 +24,7 @@ func TestMixin_UnmarshalStep(t *testing.T) {
 	step := action.Steps[0]
 	assert.Equal(t, "Compose Up", step.Description)
 	assert.NotEmpty(t, step.Outputs)
-	assert.Equal(t, Output{Name: "containerId", JsonPath: "$Id"}, step.Outputs[0])
+	assert.Equal(t, commands.Output{Name: "containerId", JsonPath: "$Id"}, step.Outputs[0])
 
 	require.Len(t, step.Arguments, 2)
 	assert.Equal(t, "up", step.Arguments[0])
