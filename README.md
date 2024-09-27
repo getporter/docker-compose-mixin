@@ -195,7 +195,7 @@ docker-compose:
       policy: missing
 ```
 
-This is equivilent to: `docker-compose --file compose.yml pull --ignore-pull-failures --policy missing serviceA serviceB`
+This is equivalent to: `docker-compose --file compose.yml pull --ignore-pull-failures --policy missing serviceA serviceB`
 
 ### Docker Compose Up
 
@@ -211,7 +211,7 @@ docker-compose:
       timeout: 30
 ```
 
-This is equivilent to: `docker-compose up --detach --timeout 30 serviceA serviceB`
+This is equivalent to: `docker-compose up --detach --timeout 30 serviceA serviceB`
 
 ### Docker Compose Down
 
@@ -224,7 +224,7 @@ docker-compose:
       timeout: 30
 ```
 
-This is equivilent to: `docker-compose down --remove-orphans --timeout 30`
+This is equivalent to: `docker-compose down --remove-orphans --timeout 30`
 
 See full bundle examples in the `examples` directory.
 
