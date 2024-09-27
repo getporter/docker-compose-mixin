@@ -12,7 +12,7 @@ import (
 
 func TestMixin_Build(t *testing.T) {
 	const buildOutput = `ADD --chmod=755 https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-linux-x86_64 /usr/local/lib/docker/cli-plugins/docker-compose
-RUN ln -s /usr/local/lib/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
+ENV PATH="$PATH:/usr/local/lib/docker/cli-plugins"
 `
 
 	t.Run("build", func(t *testing.T) {
