@@ -43,10 +43,8 @@ func (m *Mixin) Build(ctx context.Context) error {
 		dockerComposeVersion = dockerComposeDefaultVersion
 	}
 
-	dockerfileLines := fmt.Sprintf(`RUN apt-get update && apt-get install -y curl && \
-    curl -fL "https://github.com/docker/compose/releases/download/v%s/docker-compose-linux-x86_64" -o /usr/local/lib/docker/cli-plugins/docker-compose --create-dirs && \
-    chmod +x /usr/local/lib/docker/cli-plugins/docker-compose && \
-    ln -s /usr/local/lib/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose`, dockerComposeVersion)
+	dockerfileLines := fmt.Sprintf(`ADD --chmod=755 https://github.com/docker/compose/releases/download/v%s/docker-compose-linux-x86_64 /usr/local/lib/docker/cli-plugins/docker-compose
+RUN ln -s /usr/local/lib/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose`, dockerComposeVersion)
 
 	fmt.Fprintln(m.Out, dockerfileLines)
 
