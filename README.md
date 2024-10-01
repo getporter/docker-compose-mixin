@@ -153,11 +153,7 @@ outputs:
   path: /root/.kube/config
 ```
 
----
-
-## Examples
-
-### Docker Compose Up
+### Example
 
 ```yaml
 docker-compose:
@@ -169,17 +165,66 @@ docker-compose:
     timeout: 30
 ```
 
+## Mixin Commands
+
+This mixin has built-in support for common Docker Compose commands. Supported
+commands can be defined within the `docker-compose` step and support the same
+fields and options.
+
+Arguments and flags can be set on both the `docker-compose` step and on the
+specified sub-command. Arguments and flags set on the `docker-compose` step
+will be applied to the `docker-compose` part of the command while arguments
+and flags set on the sub-command will be applied to the sub-command.
+
+You may only specify one command within a single `docker-compose` step. To
+execute multiple commands, define multiple `docker-compose` steps.
+
+### Docker Compose Pull
+
+```yaml
+docker-compose:
+  description: Docker Compose Pull
+  flags:
+    file: compose.yml
+  pull:
+    arguments:
+      - serviceA
+      - serviceB
+    flags:
+      ignore-pull-failures:
+      policy: missing
+```
+
+This is equivalent to: `docker-compose --file compose.yml pull --ignore-pull-failures --policy missing serviceA serviceB`
+
+### Docker Compose Up
+
+```yaml
+docker-compose:
+  description: Docker Compose Up
+  up:
+    arguments:
+      - serviceA
+      - serviceB
+    flags:
+      detach:
+      timeout: 30
+```
+
+This is equivalent to: `docker-compose up --detach --timeout 30 serviceA serviceB`
+
 ### Docker Compose Down
 
 ```yaml
 docker-compose:
-  description: "Docker Compose Down"
-  arguments:
-    - down
-    - --remove-orphans
-  flags:
-    timeout: 30
+  description: Docker Compose Down
+  down:
+    flags:
+      remove-orphans:
+      timeout: 30
 ```
+
+This is equivalent to: `docker-compose down --remove-orphans --timeout 30`
 
 See full bundle examples in the `examples` directory.
 

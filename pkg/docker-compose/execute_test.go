@@ -27,6 +27,18 @@ func TestMixin_Execute(t *testing.T) {
 			"install", "testdata/install-input.yaml", "",
 			"docker-compose up --build --scale 2",
 		},
+		{
+			"down", "testdata/commands/down-input.yaml", "containerId",
+			"docker-compose --file test.yml down --remove-orphans --timeout 25 serviceA serviceB",
+		},
+		{
+			"pull", "testdata/commands/pull-input.yaml", "containerId",
+			"docker-compose --file test.yml pull --ignore-pull-failures --policy missing serviceA serviceB",
+		},
+		{
+			"up", "testdata/commands/up-input.yaml", "containerId",
+			"docker-compose --file test.yml up --detach --timeout 25 serviceA serviceB",
+		},
 	}
 
 	for _, tc := range testcases {

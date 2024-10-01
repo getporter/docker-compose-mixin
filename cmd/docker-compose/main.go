@@ -54,7 +54,7 @@ func main() {
 func buildRootCommand(m *dockercompose.Mixin, in io.Reader) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "docker-compose",
-		Long: "A skeleton mixin to use for building other mixins for porter 👩🏽‍✈️",
+		Long: "Use the Docker Compose CLI with Porter",
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			// Enable swapping out stdout/stderr for testing
 			m.In = in

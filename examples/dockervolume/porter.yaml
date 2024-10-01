@@ -28,9 +28,9 @@ install:
 
   - docker-compose:
       description: "Docker Compose Up"
-      arguments:
-        - up
-        - -d
+      up:
+        flags:
+          detach:
 
   - exec:
       description: "Print app logs"
@@ -47,9 +47,9 @@ upgrade:
 
   - docker-compose:
       description: "Docker Compose Up"
-      arguments:
-        - up
-        - -d
+      up:
+        flags:
+          detach:
 
   - exec:
       description: "Print app logs"
@@ -60,8 +60,7 @@ upgrade:
 uninstall:
   - docker-compose:
       description: "Docker Compose Down"
-      arguments:
-        - down
+      down:
 
   - exec:
       description: "Remove Docker Volume"

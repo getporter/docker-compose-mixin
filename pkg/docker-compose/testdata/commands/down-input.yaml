@@ -1,0 +1,15 @@
+action:
+  - docker-compose:
+      description: Compose Down
+      flags:
+        file: test.yml
+      down:
+        arguments:
+          - serviceA
+          - serviceB
+        flags:
+          remove-orphans:
+          timeout: 25
+        outputs:
+          - name: containerId
+            jsonPath: $Id

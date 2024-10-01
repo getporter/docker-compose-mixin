@@ -1,7 +1,9 @@
 package dockercompose
 
 import (
+	"get.porter.sh/mixin/docker-compose/pkg/docker-compose/commands"
 	"get.porter.sh/porter/pkg/exec/builder"
+	"gopkg.in/yaml.v3"
 )
 
 var _ builder.ExecutableAction = Action{}
@@ -49,71 +51,61 @@ func (a Action) GetSteps() []builder.ExecutableStep {
 }
 
 type Step struct {
-	Instruction `yaml:"docker-compose"`
+	commands.ComposeCommand `yaml:"docker-compose"`
 }
 
-var _ builder.ExecutableStep = Step{}
-var _ builder.StepWithOutputs = Step{}
-var _ builder.SuppressesOutput = Step{}
-
-type Instruction struct {
-	Name             string        `yaml:"name"`
-	Description      string        `yaml:"description"`
-	Arguments        []string      `yaml:"arguments,omitempty"`
-	Flags            builder.Flags `yaml:"flags,omitempty"`
-	Outputs          []Output      `yaml:"outputs,omitempty"`
-	SuppressOutput   bool          `yaml:"suppress-output,omitempty"`
-	WorkingDirectory string        `yaml:"dir,omitempty"`
-}
-
-func (s Step) GetCommand() string {
-	return "docker-compose"
-}
-
-func (s Step) GetArguments() []string {
-	return s.Arguments
-}
-
-func (s Step) GetFlags() builder.Flags {
-	return s.Flags
-}
-
-func (s Step) GetWorkingDir() string {
-	return s.WorkingDirectory
-}
-
-func (s Step) GetOutputs() []builder.Output {
-	// Go doesn't have generics, nothing to see here...
-	outputs := make([]builder.Output, len(s.Outputs))
-	for i := range s.Outputs {
-		outputs[i] = s.Outputs[i]
+// UnmarshalYAML takes any yaml in this form
+//
+//	docker-compose:
+//	  description: something
+//	  COMMAND: # e.g. pull/up/down -> make the PullCommand/UpCommand/DownCommand for us
+func (s *Step) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	// Turn the yaml into a raw map so we can iterate over the values and
+	// look for which command was used
+	stepMap := map[string]map[string]interface{}{}
+	err := unmarshal(&stepMap)
+	if err != nil {
+		return err
 	}
-	return outputs
-}
 
-func (s Step) SuppressesOutput() bool {
-	return s.SuppressOutput
-}
+	// Get at the values defined under "docker-compose"
+	composeStep := stepMap["docker-compose"]
+	b, err := yaml.Marshal(composeStep)
+	if err != nil {
+		return err
+	}
+	err = yaml.Unmarshal(b, &s.ComposeCommand)
+	if err != nil {
+		return err
+	}
 
-var _ builder.OutputJsonPath = Output{}
-var _ builder.OutputFile = Output{}
+	// Turn the command into its typed data structure
+	for key, value := range composeStep {
+		var cmd commands.Command
 
-type Output struct {
-	Name string `yaml:"name"`
+		switch key {
+		case "down":
+			cmd = &commands.DownCommand{}
+		case "pull":
+			cmd = &commands.PullCommand{}
+		case "up":
+			cmd = &commands.UpCommand{}
+		default:
+			continue
+		}
 
-	// See https://porter.sh/mixins/exec/#outputs
-	JsonPath string `yaml:"jsonPath,omitempty"`
-	FilePath string `yaml:"path,omitempty"`
-}
+		b, err = yaml.Marshal(value)
+		if err != nil {
+			return err
+		}
+		err = yaml.Unmarshal(b, cmd)
+		if err != nil {
+			return err
+		}
 
-func (o Output) GetName() string {
-	return o.Name
-}
+		s.Subcommand = &cmd
+		break // There is only 1 command
+	}
 
-func (o Output) GetJsonPath() string {
-	return o.JsonPath
-}
-
-func (o Output) GetFilePath() string {
-	return o.FilePath
+	return nil
 }
