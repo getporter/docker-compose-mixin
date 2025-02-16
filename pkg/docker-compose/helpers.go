@@ -3,6 +3,7 @@ package dockercompose
 import (
 	"testing"
 
+	"get.porter.sh/porter/pkg/config"
 	"get.porter.sh/porter/pkg/portercontext"
 	"get.porter.sh/porter/pkg/runtime"
 )
@@ -14,12 +15,12 @@ type TestMixin struct {
 
 // NewTestMixin initializes a mixin test client, with the output buffered, and an in-memory file system.
 func NewTestMixin(t *testing.T) *TestMixin {
-	c := portercontext.NewTestContext(t)
+	config := config.NewTestConfig(t)
 	m := &TestMixin{
 		Mixin: &Mixin{
-			runtime.NewConfigFor(c.Context),
+			runtime.NewConfigFor(config.Config),
 		},
-		TestContext: c,
+		TestContext: config.TestContext,
 	}
 
 	return m
