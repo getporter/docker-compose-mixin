@@ -1,8 +1,6 @@
 module get.porter.sh/mixin/docker-compose
 
-go 1.23.0
-
-toolchain go1.23.3
+go 1.23.9
 
 // These are replace directives copied from porter
 // When you use a newer version of Porter, if you run into trouble with go mod tidy
